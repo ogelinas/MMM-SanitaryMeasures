@@ -27,7 +27,7 @@ Module.register("MMM-SanitaryMeasures",{
 
 	getStyles: function () {
 		return [
-			"MMM-SanitryMeasures.css",
+			"MMM-SanitaryMeasures.css",
 		];
 	},
 
