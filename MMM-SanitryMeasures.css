@@ -1,0 +1,87 @@
+/*
+ *
+ * MMM-CountDown
+ *
+ * 
+ * MIT Licensed.
+ *
+ * Custom here your css module
+ *
+ */
+
+
+div.curfew {
+    display: inline-block;
+    text-align: left;
+}
+
+span.header {
+    text-align: left;
+}
+
+span.data {
+    padding-left:        20px;
+    text-align: left;
+}
+
+.palier1 {
+    height:             16px;
+    width:              16px;
+    margin-bottom:      0px;
+    margin-right:       5px;
+    background-color: #3FA535;
+    border-radius:      50%;
+    display:            inline-block;
+}
+
+.palier2 {
+    height:             16px;
+    width:              16px;
+    margin-bottom:      0px;
+    margin-right:       5px;
+    background-color: #FFED00;
+    border-radius:      50%;
+    display:            inline-block;
+}
+
+.palier3 {
+    height:             16px;
+    width:              16px;
+    margin-bottom:      0px;
+    margin-right:       5px;
+    background-color: #F39200;
+    border-radius:      50%;
+    display:            inline-block;
+}
+
+.palier4 {
+    height:             16px;
+    width:              16px;
+    margin-bottom:      0px;
+    margin-right:       5px;
+    background-color: #CD1719;
+    border-radius:      50%;
+    display:            inline-block;
+}
+
+.palier5 {
+    height:             16px;
+    width:              16px;
+    margin-bottom:      0px;
+    margin-right:       5px;
+    background-color: #641616;
+    border-radius:      50%;
+    border: 1px solid #AAAAAA;
+    display:            inline-block;
+}
+
+.palier6 {
+    height:             16px;
+    width:              16px;
+    margin-bottom:      0px;
+    margin-right:       5px;
+    background-color: #4C4B4B;
+    border-radius:      50%;
+    border: 1px solid #AAAAAA;
+    display:            inline-block;
+}
