@@ -1,6 +1,6 @@
 /*
  *
- * MMM-CountDown
+ * MMM-SanitaryMeasures
  *
  * 
  * MIT Licensed.
@@ -10,18 +10,17 @@
  */
 
 
-div.curfew {
-    display: inline-block;
-    text-align: left;
+div.sanitary_measures {
+    display:            inline-block;
 }
 
-span.header {
-    text-align: left;
+td.level_1 {
+    text-align:         left;
 }
 
-span.data {
-    padding-left:        20px;
-    text-align: left;
+td.level_2 {
+    padding-left:       20px;
+    text-align:         left;
 }
 
 .palier1 {

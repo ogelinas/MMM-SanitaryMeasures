@@ -1,8 +1,8 @@
 {
-  "name": "MMM-SanitryMeasures",
+  "name": "MMM-SanitaryMeasures",
   "version": "1.0.0",
   "description": "Sanitry Measures",
-  "main": "MMM-SanitryMeasures.js",
+  "main": "MMM-MMM-SanitaryMeasures.js",
   "author": "Olivier Gélinas",
   "license": "MIT",
   "devDependencies": {
