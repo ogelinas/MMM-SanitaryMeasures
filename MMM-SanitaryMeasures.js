@@ -5,7 +5,8 @@ Module.register("MMM-SanitaryMeasures",{
 		curfew: {
 			isActive:	true,
 			begin:		"22:00:00",
-			end: 		"05:00:00"
+			end: 		"05:00:00",
+			play_sound:	 true
 		},
 		closed_on_sunday: {
 			isActive:	true,
@@ -16,6 +17,11 @@ Module.register("MMM-SanitaryMeasures",{
 	// set update interval
 	start: function() {
 		var self = this;
+
+		var date = new Date();
+		this.day = date.getDay();
+		this.as_play = false;
+
 		setInterval(function() {
 			self.updateDom(); // no speed defined, so it updates instantly.
 		}, this.config.customInterval); 
@@ -76,7 +82,7 @@ Module.register("MMM-SanitaryMeasures",{
 			table.appendChild(tr_curfew_current_mode);
 			
 			var td_curfew_current_mode = document.createElement("td");
-			td_curfew_current_mode.classList.add("small", "level_2");
+			td_curfew_current_mode.classList.add("xsmall", "level_2");
 			tr_curfew_current_mode.appendChild(td_curfew_current_mode);
 
 			//next mode
@@ -84,22 +90,8 @@ Module.register("MMM-SanitaryMeasures",{
 			table.appendChild(tr_curfew_next_mode);
 			
 			var td_curfew_next_mode= document.createElement("td");
-			td_curfew_next_mode.classList.add("small", "level_2");
+			td_curfew_next_mode.classList.add("xsmall", "level_2");
 			tr_curfew_next_mode.appendChild(td_curfew_next_mode);
-
-
-			// var curfew_current_mode_wrapper = document.createElement("div");
-			// curfew_current_mode_wrapper.classList.add("small");
-			// var curfew_current_mode = document.createElement("span");
-			// curfew_current_mode.classList.add("small", "data");
-			// curfew_current_mode_wrapper.appendChild(curfew_current_mode);
-
-			// var curfew_next_mode_wrapper = document.createElement("div");
-			// curfew_next_mode_wrapper.classList.add("small");
-			// var curfew_next_mode = document.createElement("span");
-			// curfew_next_mode.classList.add("small", "data");
-			// curfew_next_mode_wrapper.appendChild(curfew_next_mode);
-
 
 			// Curfew - Time calculation
 			var today = new Date(Date.now());
@@ -135,6 +127,30 @@ Module.register("MMM-SanitaryMeasures",{
 				td_curfew_current_mode.innerHTML = "· Couvre-feu jusqu'à " + this.formatTime(this.config.curfew.end);
 				td_curfew_next_mode.innerHTML = "· Normalité dans " + diffHours + ":" + diffMinutes.toString().padStart(2, '0') + ":" + diffSeconds.toString().padStart(2, '0');
 			}
+
+			// console.log("play_sound: " + this.config.curfew.play_sound);
+			if (this.config.curfew.play_sound) {
+				var audio = document.createElement("audio");
+				wrapper.appendChild(audio);
+
+				if (this.as_play) {
+					if (this.day != today.getDay()) {
+						this.as_play = false;
+					}
+				} else {
+					// console.log("as not play");
+					// console.log("today: " + this.getTime(today));
+					// console.log("begin: " + this.getTime(begin));
+					// console.log(this.getTime(today) > this.getTime(begin));
+					if (this.dateCompare(today, begin) == 1) {
+						console.log("play sound");;
+						audio.src = "modules/MMM-SanitaryMeasures/purge_siren.mp3";
+						audio.play()
+
+						this.as_play = true;
+					}
+				}
+			}
 		}
 
 		if (this.config.closed_on_sunday.isActive) {
@@ -164,7 +180,7 @@ Module.register("MMM-SanitaryMeasures",{
 			table.appendChild(tr_closed_until_time);
 			
 			var td_closed_until_time = document.createElement("td");
-			td_closed_until_time.classList.add("small", "level_2");
+			td_closed_until_time.classList.add("xsmall", "level_2");
 			td_closed_until_time.innerHTML = "· Encore " + totalSundays + " dimanche" + ((totalSundays>1) ? "s": "");
 			tr_closed_until_time.appendChild(td_closed_until_time);
 
@@ -173,8 +189,8 @@ Module.register("MMM-SanitaryMeasures",{
 			table.appendChild(tr_closed_until_date);
 			
 			var td_closed_until_date = document.createElement("td");
-			td_closed_until_date.classList.add("small", "level_2");
-			td_closed_until_date.innerHTML = "&nbsp;&nbsp;&nbsp;juqu'au " + endDate.toLocaleDateString('en-CA');
+			td_closed_until_date.classList.add("xsmall", "level_2");
+			td_closed_until_date.innerHTML = "&nbsp;&nbsp;&nbsp;jusqu'au " + endDate.toLocaleDateString('en-CA');
 			tr_closed_until_date.appendChild(td_closed_until_date);
 		}
 		
