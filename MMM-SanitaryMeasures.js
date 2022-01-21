@@ -5,8 +5,7 @@ Module.register("MMM-SanitaryMeasures",{
 		curfew: {
 			isActive:	true,
 			begin:		"22:00:00",
-			end: 		"05:00:00",
-			play_sound:	 true
+			end: 		"05:00:00"
 		},
 		closed_on_sunday: {
 			isActive:	true,
@@ -126,30 +125,6 @@ Module.register("MMM-SanitaryMeasures",{
 			} else if (this.dateCompare(today, end) == 1 & this.dateCompare(today, begin) == 1) {
 				td_curfew_current_mode.innerHTML = "· Couvre-feu jusqu'à " + this.formatTime(this.config.curfew.end);
 				td_curfew_next_mode.innerHTML = "· Normalité dans " + diffHours + ":" + diffMinutes.toString().padStart(2, '0') + ":" + diffSeconds.toString().padStart(2, '0');
-			}
-
-			// console.log("play_sound: " + this.config.curfew.play_sound);
-			if (this.config.curfew.play_sound) {
-				var audio = document.createElement("audio");
-				wrapper.appendChild(audio);
-
-				if (this.as_play) {
-					if (this.day != today.getDay()) {
-						this.as_play = false;
-					}
-				} else {
-					// console.log("as not play");
-					// console.log("today: " + this.getTime(today));
-					// console.log("begin: " + this.getTime(begin));
-					// console.log(this.getTime(today) > this.getTime(begin));
-					if (this.dateCompare(today, begin) == 1) {
-						console.log("play sound");;
-						audio.src = "modules/MMM-SanitaryMeasures/purge_siren.mp3";
-						audio.play()
-
-						this.as_play = true;
-					}
-				}
 			}
 		}
 
